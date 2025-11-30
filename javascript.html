@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project 9: JS Calculators</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+/* --- Core Styling from project.html --- */
+body {
+    font-family: "Times New Roman", Georgia, Serif; 
+    margin-top: 60px; /* MODIFIED: Increased margin for fixed navigation bar */
+    color: #333; 
+    text-align: center; 
+    overflow-x: hidden; 
+} 
+h1, h2 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+/* ADDED: Logo style for the main navigation bar */
+.logo {
+    font-weight: bold;
+    color: #4CAF50; 
+    font-size: 22px !important; 
+}
+/* END ADDED: Logo style */
+#video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1; 
+    background-size: cover;
+    overflow: hidden;
+}
+#video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: -1; 
+}
+.main-content {
+    padding-top: 60px;
+    padding-bottom: 30px;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: auto;
+}
+.content-card {
+    background-color: rgba(255, 255, 255, 0.85); 
+    padding: 32px;
+    border-radius: 20px; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    margin-bottom: 30px; 
+    text-align: left; /* Align text within card to left for better readability */
+}
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+}
+.w3-top {
+  position: fixed; 
+  top: 0;
+  width: 100%;
+  z-index: 1000; 
+}
+.w3-bar .w3-bar-item {
+    font-size: 18px; 
+    padding: 12px 16px; 
+}
+/* --- Custom Styles --- */
+.content-card h2 {
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 1.5em;
+    margin-top: 0;
+}
+.calculator-section {
+    padding: 15px 0;
+    text-align: center;
+}
+input[type="number"] {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #45a049;
+}
+.calculator-section p {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+#sumResult, #prodResult, #avgResult, #triangleResult, #squareResult {
+    color: #008CBA;
+    font-size: 1.2em;
+}
+hr {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* --- UPDATED Back Button Style (Consistent with tog.html) --- */
+.back-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border-radius: 8px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    display: inline-block; 
+    margin: 30px auto 20px; 
+    width: auto; 
+}
+
+.back-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+    </style>
+</head>
+<body>
+
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <span class="w3-bar-item logo">Fundamentals of Computing</span>
+    <div class="w3-right w3-hide-small">
+      <a href="index.html" class="w3-bar-item w3-button">Course</a>
+      <a href="project.html" class="w3-bar-item w3-button w3-text-green">Project</a>
+	  <a href="concept.html" class="w3-bar-item w3-button">Concepts</a>
+      <a href="Databasese.html" class="w3-bar-item w3-button">Databases</a>
+      <a href="documentation.html" class="w3-bar-item w3-button">Documentation</a>
+      <a href="Dev team.html" class="w3-bar-item w3-button">Dev Team</a>
+    </div>
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-large w3-right w3-hide-large w3-hide-medium" onclick="toggleNav()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="toggleNav()" class="w3-bar-item w3-button w3-large w3-padding-16">Close &times;</a>
+  <a href="notgate.html" onclick="toggleNav()" class="w3-bar-item w3-button">Project 1: NOT Gate</a>
+  <a href="andgate.html" onclick="toggleNav()" class="w3-bar-item w3-button">Project 2: AND Gate</a>
+  <a href="easyand.html" onclick="toggleNav()" class="w3-bar-item w3-button">Project 3: Easy AND</a>
+  <a href="binarytohex.html" onclick="toggleNav()" class="w3-bar-item w3-button">Project 4: Binary to Hex</a>
+  <a href="ascii.html" onclick="toggleNav()" class="w3-bar-item w3-button">Project 5: ASCII</a>
+  <a href="unicode.html" onclick="toggleNav()" class="w3-bar-item w3-button">Project 6: UNICODE</a>
+  <a href="MLinstructions.html" onclick="toggleNav()" class="w3-bar-item w3-button">Project 7: ML Instructions</a>
+  <a href="Bmi.html" onclick="toggleNav()" class="w3-bar-item w3-button">Project 8: BMI Calculator</a>
+  <a href="javascript.html" onclick="toggleNav()" class="w3-bar-item w3-button">Project 9: JS Calculators</a>
+  <a href="tog.html" onclick="toggleNav()" class="w3-bar-item w3-button">Project 10: TOG Map</a>
+</nav>
+
+<video autoplay loop muted id="video-background">
+ <source src="damascus.mp4" type="video/mp4">
+</video>
+<div id="video-overlay"></div>
+
+<div class="w3-content main-content">
+  <div class="content-card">
+    <h1 style="text-align:center;">Project 9: Basic Calculators</h1>
+    
+    <div class="calculator-section" id="sum-section">
+      <h2>1. Sum of Two Numbers</h2>
+      <input type="number" id="sumNum1" placeholder="Enter first number">
+      <input type="number" id="sumNum2" placeholder="Enter second number">
+      <button onclick="calculateSum()">Calculate Sum</button>
+      <p>Result: <span id="sumResult"></span></p>
+    </div>
+    <hr>
+
+    <div class="calculator-section" id="product-section">
+      <h2>2. Product of Two Numbers</h2>
+      <input type="number" id="prodNum1" placeholder="Enter first number">
+      <input type="number" id="prodNum2" placeholder="Enter second number">
+      <button onclick="calculateProduct()">Calculate Product</button>
+      <p>Result: <span id="prodResult"></span></p>
+    </div>
+    <hr>
+
+    <div class="calculator-section" id="average-section">
+      <h2>3. Average of Two Numbers</h2>
+      <input type="number" id="avgNum1" placeholder="Enter first number">
+      <input type="number" id="avgNum2" placeholder="Enter second number">
+      <button onclick="calculateAverage()">Calculate Average</button>
+      <p>Result: <span id="avgResult"></span></p>
+    </div>
+    <hr>
+
+    <div class="calculator-section" id="triangle-section">
+      <h2>4. Area of a Triangle</h2>
+      <input type="number" id="triangleBase" placeholder="Enter base (b)">
+      <input type="number" id="triangleHeight" placeholder="Enter height (h)">
+      <button onclick="calculateTriangleArea()">Calculate Area</button>
+      <p>Result: <span id="triangleResult"></span></p>
+    </div>
+    <hr>
+
+    <div class="calculator-section" id="square-section">
+      <h2>5. Area of a Square</h2>
+      <input type="number" id="squareSide" placeholder="Enter side length (s)">
+      <button onclick="calculateSquareArea()">Calculate Area</button>
+      <p>Result: <span id="squareResult"></span></p>
+    </div>
+    
+    <a href="project.html" class="back-button">Back to Projects</a>
+  </div>
+</div>
+
+<script>
+    // Navigation toggle function (Required for sidebar)
+    function toggleNav() {
+        let x = document.getElementById("mySidebar");
+        if (x.style.display === 'block') {
+            x.style.display = 'none';
+        } else {
+            x.style.display = 'block';
+        }
+    }
+    
+    // Helper function to get value and handle non-numbers
+    function getNumber(id) {
+        return parseFloat(document.getElementById(id).value);
+    }
+
+    // 1. SUM OF TWO NUMBERS
+    function calculateSum() {
+        let num1 = getNumber('sumNum1');
+        let num2 = getNumber('sumNum2');
+        
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById('sumResult').textContent = "Please enter valid numbers";
+            return;
+        }
+
+        let sum = num1 + num2;
+        document.getElementById('sumResult').textContent = sum;
+    }
+
+    // 2. PRODUCT OF TWO NUMBERS (Multiplication)
+    function calculateProduct() {
+        let num1 = getNumber('prodNum1');
+        let num2 = getNumber('prodNum2');
+
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById('prodResult').textContent = "Please enter valid numbers";
+            return;
+        }
+        
+        let product = num1 * num2;
+        document.getElementById('prodResult').textContent = product;
+    }
+
+    // 3. AVERAGE OF TWO NUMBERS
+    function calculateAverage() {
+        let num1 = getNumber('avgNum1');
+        let num2 = getNumber('avgNum2');
+
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById('avgResult').textContent = "Please enter valid numbers";
+            return;
+        }
+        
+        let average = (num1 + num2) / 2;
+        document.getElementById('avgResult').textContent = average.toFixed(2);
+    }
+
+    // 4. AREA OF A TRIANGLE (Area = 0.5 * base * height)
+    function calculateTriangleArea() {
+        let base = getNumber('triangleBase');
+        let height = getNumber('triangleHeight');
+
+        if (isNaN(base) || base < 0 || isNaN(height) || height < 0) {
+            document.getElementById('triangleResult').textContent = "Please enter valid, positive base and height";
+            return;
+        }
+        
+        let area = 0.5 * base * height;
+        document.getElementById('triangleResult').textContent = area.toFixed(2);
+    }
+
+    // 5. AREA OF A SQUARE (Area = s^2)
+    function calculateSquareArea() {
+        let side = getNumber('squareSide');
+
+        if (isNaN(side) || side < 0) {
+            document.getElementById('squareResult').textContent = "Please enter a valid, positive side length";
+            return;
+        }
+        
+        let area = side * side;
+        document.getElementById('squareResult').textContent = area;
+    }
+</script>
+
+</body>
+</html>

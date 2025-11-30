@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project 3: OR Logic Gate - Easy</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+/* --- Core Styling from project.html --- */
+body {
+    font-family: "Times New Roman", Georgia, Serif; 
+    margin-top: 50px; 
+    color: #333; 
+    text-align: center; 
+    overflow-x: hidden; 
+} 
+h2 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+/* New Nav Bar Styles */
+.w3-top {
+  position: fixed; 
+  top: 0;
+  width: 100%;
+  z-index: 1000; 
+}
+.w3-bar .w3-bar-item {
+    font-size: 18px; 
+    padding: 12px 16px; 
+}
+.logo {
+    font-weight: bold;
+    color: #4CAF50; 
+    font-size: 22px !important; 
+}
+/* End Nav Bar Styles */
+#video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1; 
+    background-size: cover;
+    overflow: hidden;
+}
+
+#video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: -1; 
+}
+/* Content Card Styling */
+.main-content {
+    padding-top: 60px;
+    padding-bottom: 30px;
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.content-card {
+    background-color: rgba(255, 255, 255, 0.85); 
+    padding: 32px;
+    border-radius: 20px; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px; 
+    color: #333;
+    min-height: 500px; /* Ensure sufficient height */
+    transition: all 0.3s ease;
+    width: 100%;
+}
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+}
+.back-button {
+    /* float: left; - REMOVED */
+    display: block; /* Make it a block element to apply margin: 0 auto; */
+    width: fit-content; /* Ensure it only takes the width of its content */
+    margin: 0 auto 30px auto; /* Center it and add bottom margin */
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.back-button:hover {
+    background-color: #45a049;
+}button {
+    background-color: #4CAF50; /* Green color for buttons (to match AND gate) */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #45a049;
+}
+
+img {
+    margin-top: 20px;
+    max-width: 100%;
+    height: auto;
+}
+    </style>
+</head>
+<body>
+
+<video autoplay loop muted id="video-background">
+  <source src="damascus.mp4" type="video/mp4">
+</video>
+<div id="video-overlay"></div>
+
+<nav class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <span class="w3-bar-item logo">Fundamentals of Computing</span>
+    <div class="w3-right w3-hide-small">
+      <a href="index.html" class="w3-bar-item w3-button">Course</a>
+      <a href="project.html" class="w3-bar-item w3-button w3-text-green">Project</a>
+	  <a href="concept.html" class="w3-bar-item w3-button">Concepts</a>
+      <a href="database.html" class="w3-bar-item w3-button">Databases</a>
+      <a href="documentation.html" class="w3-bar-item w3-button">Documentation</a>
+      <a href="dev_team.html" class="w3-bar-item w3-button">Dev Team</a>
+    </div>
+  </div>
+</nav>
+
+<div class="main-content">
+  <div class="content-card">
+    
+    <a href="project.html" class="back-button">Back to Projects</a>
+    
+    <h2>Project 3: OR Logic Gate - Easy Version</h2>
+    <hr>
+    <p>This is an animation of an **OR Logic Gate**</p>
+    
+    <div>
+      <button onclick="document.getElementById('myImage').src='oroff.png'">0 OR 0</button>
+      <button onclick="document.getElementById('myImage').src='onoron.png'">0 OR 1</button>
+      <button onclick="document.getElementById('myImage').src='oronoff.png'">1 OR 0</button>
+      <button onclick="document.getElementById('myImage').src='oronon.png'">1 OR 1</button>
+    </div>
+    
+    <img id="myImage" src="oroff.png" alt="OR Gate Output" />
+    
+    
+  </div>
+</div>
+
+</body>
+</html>

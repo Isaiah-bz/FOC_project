@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 8: BMI Calculator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+/* --- Core Styling from project.html --- */
+body {
+    font-family: "Times New Roman", Georgia, Serif; 
+    margin-top: 50px; 
+    color: #333; 
+    text-align: center; 
+    overflow-x: hidden; 
+} 
+h2 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+/* New Nav Bar Styles */
+.w3-top {
+  position: fixed; 
+  top: 0;
+  width: 100%;
+  z-index: 1000; 
+}
+.w3-bar .w3-bar-item {
+    font-size: 18px; 
+    padding: 12px 16px; 
+}
+.logo {
+    font-weight: bold;
+    color: #4CAF50; 
+    font-size: 22px !important; 
+}
+/* End Nav Bar Styles */
+#video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1; 
+    background-size: cover;
+    overflow: hidden;
+}
+#video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: -1; 
+}
+.main-content {
+    padding-top: 100px; /* Adjusted padding to clear fixed nav */
+    padding-bottom: 30px;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+    max-width: 800px; 
+    margin: auto;
+    min-height: calc(100vh - 50px); /* Ensure content fills the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.content-card {
+    background-color: rgba(255, 255, 255, 0.85); 
+    padding: 32px;
+    border-radius: 20px; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    margin-bottom: 30px; 
+    width: 100%;
+    max-width: 500px;
+}
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+}
+.input-group {
+    margin-bottom: 20px;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+button:hover {
+    background-color: #45a049;
+}
+#result, #status {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+/* --- Back Button Style (Green) --- */
+.back-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border-radius: 8px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    display: inline-block; 
+    margin-bottom: 20px;
+}
+.back-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+  </style>
+</head>
+<body>
+
+<video autoplay loop muted id="video-background">
+ <source src="damascus.mp4" type="video/mp4">
+</video>
+<div id="video-overlay"></div>
+
+<nav class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <span class="w3-bar-item logo">Fundamentals of Computing</span>
+    <div class="w3-right w3-hide-small">
+      <a href="index.html" class="w3-bar-item w3-button">Course</a>
+      <a href="project.html" class="w3-bar-item w3-button w3-text-green">Project</a>
+	  <a href="concept.html" class="w3-bar-item w3-button">Concepts</a>
+      <a href="Databasese.html" class="w3-bar-item w3-button">Databases</a>
+      <a href="documentation.html" class="w3-bar-item w3-button">Documentation</a>
+      <a href="Dev team.html" class="w3-bar-item w3-button">Dev Team</a>
+    </div>
+  </div>
+</nav>
+
+<div class="main-content">
+  <div class="content-card w3-center">
+    
+    <a href="project.html" class="back-button">Back to Projects</a>
+    
+    <h2>Project 8: BMI Calculator</h2>
+    <hr>
+    
+    <div class="input-group">
+      <label for="height">Height in Inches:</label>
+      <input type="number" id="height" placeholder="e.g., 70" step="0.01">
+    </div>
+    
+    <div class="input-group">
+      <label for="weight">Weight in Pounds:</label>
+      <input type="number" id="weight" placeholder="e.g., 180" step="0.01">
+    </div>
+    
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    
+    <h3>Your BMI:</h3>
+    <p id="result">0.00</p>
+    
+    <h3>Status:</h3>
+    <p id="status"></p>
+    
+  </div>
+</div>
+
+<script>
+    function calculateBMI() {
+      let height = parseFloat(document.getElementById('height').value);
+      let weight = parseFloat(document.getElementById('weight').value);
+
+      if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+        document.getElementById('result').textContent = "Please enter valid numbers.";
+        document.getElementById('status').textContent = "";
+        return;
+      }
+
+      // BMI Formula for US units: (weight in lbs / (height in in * height in in)) * 703
+      let bmi = (weight * 703) / (height * height);
+      document.getElementById('result').textContent = bmi.toFixed(2);
+
+      
+      let category = "";
+      let statusElement = document.getElementById('status');
+      if (bmi < 18.5) {
+        category = "Underweight";
+        statusElement.style.color = "#FFC107"; // Yellow
+      } else if (bmi < 24.9) {
+        category = "Normal weight";
+        statusElement.style.color = "#4CAF50"; // Green
+      } else if (bmi < 29.9) {
+        category = "Overweight";
+        statusElement.style.color = "#FF9800"; // Orange
+      } else {
+        category = "Obese";
+        statusElement.style.color = "#F44336"; // Red
+      }
+      
+      statusElement.textContent = category;
+    }
+</script>
+
+</body>
+</html>

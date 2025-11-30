@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belize District Map Toggle</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* Consolidated Styles from main theme */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Times New Roman", Georgia, Serif; 
+  color: #333;
+  text-align: center;
+  overflow-x: hidden;
+} 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+.w3-top {
+  position: fixed; 
+  top: 0;
+  width: 100%;
+  z-index: 1000; 
+}
+.w3-bar .w3-bar-item {
+    font-size: 18px; 
+    padding: 12px 16px; 
+}
+.logo {
+    font-weight: bold;
+    color: #4CAF50; 
+    font-size: 22px !important; 
+}
+#video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1; 
+    background-size: cover;
+    overflow: hidden;
+}
+#video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: -1; 
+}
+.main-content {
+    padding-top: 100px; /* Adjusted padding to clear fixed nav */
+    padding-bottom: 30px;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+    max-width: 800px; 
+    margin: auto;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.content-card {
+    background-color: rgba(255, 255, 255, 0.85); 
+    padding: 32px;
+    border-radius: 20px; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    margin-bottom: 30px; 
+    width: 100%; 
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* Updated map image styles to fit inside the card */
+img {
+    width: 100%; /* Take full width of the card */
+    max-width: 600px;
+    border: 2px solid #555;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 20px auto; /* Center image and give vertical margin */
+    display: block;
+}
+img:hover {
+    transform: scale(1.01); 
+}
+
+/* Button to go back to projects page */
+.back-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border-radius: 8px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    display: inline-block; 
+    margin-bottom: 20px;
+}
+
+.back-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Override existing p style */
+p {
+    font-family: "Times New Roman", Georgia, Serif;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+h2 {
+    font-size: 28px;
+    color: #4CAF50; 
+}
+</style>
+</head>
+<body>
+
+<video autoplay loop muted id="video-background">
+  <source src="damascus.mp4" type="video/mp4">
+</video>
+<div id="video-overlay"></div>
+
+<nav class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <span class="w3-bar-item logo">Fundamentals of Computing</span>
+    <div class="w3-right w3-hide-small">
+      <a href="index.html" class="w3-bar-item w3-button">Course</a>
+      <a href="project.html" class="w3-bar-item w3-button w3-text-green">Project</a>
+	  <a href="concept.html" class="w3-bar-item w3-button">Concepts</a>
+      <a href="Databasese.html" class="w3-bar-item w3-button">Databases</a>
+      <a href="documentation.html" class="w3-bar-item w3-button">Documentation</a>
+      <a href="Dev team.html" class="w3-bar-item w3-button">Dev Team</a>
+    </div>
+  </div>
+</nav>
+
+<div class="w3-content main-content">
+    <div class="content-card w3-center">
+        <a href="project.html" class="back-button">Back to Projects</a>
+
+        <h2>Belize District Map Toggle</h2>
+        <p>Click on the map to cycle through district views.</p>
+
+        <img id="belizeMap"
+             src="800px-Belize_Districts.png"
+             alt="Belize Map"
+             onclick="toggleMap()">
+
+        <script>
+          let toggle = 0;
+
+          function toggleMap() {
+            const map = document.getElementById('belizeMap');
+
+            if (toggle === 0) {
+              map.src = "800px-Belize_Districts.png"; 
+              toggle = 1;
+            } else if (toggle === 1) {
+              map.src = "Belize_Map_Corozal.png"; 
+              toggle = 2;
+              } else if (toggle === 2) {
+              map.src = "Belize_Map_Orange_Walk.png"; 
+              toggle = 3;
+              } else if (toggle === 3) {
+              map.src = "Belize_Map_Belize_District.png"; 
+              toggle = 4;
+              } else if (toggle === 4) {
+              map.src = "Belize_Map_Cayo_District.png"; 
+              toggle = 5;
+              } else if (toggle === 5) {
+              map.src = "Belize_Map_Stann_Creek.png"; 
+              toggle = 6;
+            } else {
+              map.src = "Belize_Map_Toledo_District.png"; 
+              toggle = 0;
+            }
+          }
+        </script>
+    </div>
+</div>
+
+</body>
+</html>
