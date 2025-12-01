@@ -130,9 +130,11 @@ img {
       <a href="index.html" class="w3-bar-item w3-button">Course</a>
       <a href="project.html" class="w3-bar-item w3-button w3-text-green">Project</a>
 	  <a href="concept.html" class="w3-bar-item w3-button">Concepts</a>
-      <a href="Databasese.html" class="w3-bar-item w3-button">Databases</a>
+      <!-- Note: Fixed potential typo in original link to 'Databases.html' -->
+      <a href="Databases.html" class="w3-bar-item w3-button">Databases</a> 
       <a href="documentation.html" class="w3-bar-item w3-button">Documentation</a>
-      <a href="Dev team.html" class="w3-bar-item w3-button">Dev Team</a>
+      <!-- Note: Fixed space in original link to 'Dev_team.html' -->
+      <a href="Dev_team.html" class="w3-bar-item w3-button">Dev Team</a>
     </div>
   </div>
 </nav>
@@ -144,16 +146,18 @@ img {
     
     <h2>Project 3: AND Logic Gate - Easy Version</h2>
     <hr>
-    <p>This is an animation of an **AND Logic Gate**.</p>
+    <p>This is an animation of an **AND Logic Gate**. Click the buttons to see the different input combinations (truth table).</p>
     
     <div>
+      <!-- All image sources are now consistently lowercase for GitHub compatibility -->
       <button onclick="document.getElementById('myImage').src='and2off.png'">0 AND 0</button>
       <button onclick="document.getElementById('myImage').src='andoffon.png'">0 AND 1</button>
       <button onclick="document.getElementById('myImage').src='andonoff.png'">1 AND 0</button>
       <button onclick="document.getElementById('myImage').src='and2on.png'">1 AND 1</button>
     </div>
     
-    <img id="myImage" src="and2off.PNG" alt="AND Logic Gate Status">
+    <!-- Initial image source is also set to the correct lowercase filename -->
+    <img id="myImage" src="and2off.png" alt="AND Logic Gate Status">
 
   </div>
 </div>
