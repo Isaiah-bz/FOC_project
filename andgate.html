@@ -47,6 +47,7 @@ h2 {
     background-size: cover;
     overflow: hidden;
 }
+
 #video-overlay {
     position: fixed;
     top: 0;
@@ -56,70 +57,70 @@ h2 {
     background: rgba(0, 0, 0, 0.4); 
     z-index: -1; 
 }
+/* Content Card Styling */
 .main-content {
-    padding-top: 100px; /* Adjusted padding to clear fixed nav */
+    padding-top: 60px;
     padding-bottom: 30px;
-    background-color: transparent;
     position: relative;
     z-index: 2;
-    max-width: 800px; 
-    margin: auto;
+    max-width: 900px;
+    margin: 0 auto;
 }
 .content-card {
     background-color: rgba(255, 255, 255, 0.85); 
     padding: 32px;
     border-radius: 20px; 
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
     margin-bottom: 30px; 
+    color: #333;
+    min-height: 500px; /* Ensure sufficient height */
+    transition: all 0.3s ease;
     width: 100%;
 }
 .content-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
 }
-button {
+.back-button {
+    /* float: left; - REMOVED */
+    display: block; /* Make it a block element to apply margin: 0 auto; */
+    width: fit-content; /* Ensure it only takes the width of its content */
+    margin: 0 auto 30px auto; /* Center it and add bottom margin */
+    text-decoration: none;
     background-color: #4CAF50;
     color: white;
-    border: none;
+    padding: 8px 15px;
     border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.back-button:hover {
+    background-color: #45a049;
+}button {
+    background-color: #4CAF50; /* Green color for buttons (to match AND gate) */
+    color: white;
+    border: none;
     padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
     margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
     transition: background-color 0.3s;
 }
 button:hover {
     background-color: #45a049;
 }
+
 img {
     margin-top: 20px;
     max-width: 100%;
     height: auto;
-}
-/* --- Back Button Style (Green) --- */
-.back-button {
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    border-radius: 8px;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    border: none;
-    cursor: pointer;
-    display: inline-block; 
-    margin-bottom: 20px;
-}
-.back-button:hover {
-    background-color: #45a049; /* Darker green on hover */
 }
     </style>
 </head>
 <body>
 
 <video autoplay loop muted id="video-background">
- <source src="damascus.mp4" type="video/mp4">
+  <source src="damascus.mp4" type="video/mp4">
 </video>
 <div id="video-overlay"></div>
 
@@ -130,11 +131,9 @@ img {
       <a href="index.html" class="w3-bar-item w3-button">Course</a>
       <a href="project.html" class="w3-bar-item w3-button w3-text-green">Project</a>
 	  <a href="concept.html" class="w3-bar-item w3-button">Concepts</a>
-      <!-- Note: Fixed potential typo in original link to 'Databases.html' -->
-      <a href="Databases.html" class="w3-bar-item w3-button">Databases</a> 
+      <a href="database.html" class="w3-bar-item w3-button">Databases</a>
       <a href="documentation.html" class="w3-bar-item w3-button">Documentation</a>
-      <!-- Note: Fixed space in original link to 'Dev_team.html' -->
-      <a href="Dev_team.html" class="w3-bar-item w3-button">Dev Team</a>
+      <a href="dev_team.html" class="w3-bar-item w3-button">Dev Team</a>
     </div>
   </div>
 </nav>
@@ -146,19 +145,18 @@ img {
     
     <h2>Project 3: AND Logic Gate - Easy Version</h2>
     <hr>
-    <p>This is an animation of an **AND Logic Gate**. Click the buttons to see the different input combinations (truth table).</p>
+    <p>This is an animation of an **AND Logic Gate**</p>
     
     <div>
-      <!-- All image sources are now consistently lowercase for GitHub compatibility -->
-      <button onclick="document.getElementById('myImage').src='and2off.png'">0 AND 0</button>
-      <button onclick="document.getElementById('myImage').src='andoffon.png'">0 AND 1</button>
-      <button onclick="document.getElementById('myImage').src='andonoff.png'">1 AND 0</button>
+      <button onclick="document.getElementById('myImage').src='and2off.PNG'">0 AND 0</button>
+      <button onclick="document.getElementById('myImage').src='andoffon.PNG'">0 AND 1</button>
+      <button onclick="document.getElementById('myImage').src='andonoff.PNG'">1 AND 0</button>
       <button onclick="document.getElementById('myImage').src='and2on.png'">1 AND 1</button>
     </div>
     
-    <!-- Initial image source is also set to the correct lowercase filename -->
-    <img id="myImage" src="and2off.png" alt="AND Logic Gate Status">
-
+    <img id="myImage" src="and2off.PNG" alt="AND Gate Output" />
+    
+    
   </div>
 </div>
 
